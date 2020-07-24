@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ResourceSystemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="resource-system.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="de.alpharogroup.resource.system.ResourceSystemApplication" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
