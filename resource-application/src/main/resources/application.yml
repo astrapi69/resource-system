@@ -39,9 +39,6 @@ app:
   db-username: postgres
   db-password: postgres
   context-path: ${app.uri-scheme}://${app.host}:${server.port}/
-  signin-failed-page: unauthorized.html
-  jwt:
-    secret: cp*D33tZY(juumBUcBDVv8tJ!8w/T@JGpS)@)Sr6EYfjFBTRUJfu@&6jz-7*cFk5
   signin-path-patterns:
     - /v1/auth/signin
   public-path-patterns:

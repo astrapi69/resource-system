@@ -44,7 +44,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-@RestController @RequestMapping(value = ApplicationConfiguration.REST_VERSION + ResourcesController.REST_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+@RestController
+@RequestMapping(value = ApplicationConfiguration.REST_VERSION + ResourcesController.REST_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true) public class ResourcesController
 {
 	ResourcesService resourcesService;
