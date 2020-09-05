@@ -1,1 +1,6 @@
 rootProject.name = 'resource-system'
+include 'resource-application'
+include 'resource-entities'
+include 'resource-services'
+include 'resource-viewmodels'
+

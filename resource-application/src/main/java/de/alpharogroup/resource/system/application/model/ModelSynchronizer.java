@@ -24,21 +24,17 @@
  */
 package de.alpharogroup.resource.system.application.model;
 
-import java.io.File;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.TimeZone;
-
 import de.alpharogroup.checksum.FileChecksumExtensions;
-import de.alpharogroup.checksum.api.ChecksumAlgorithm;
 import de.alpharogroup.copy.object.CopyObjectExtensions;
-import de.alpharogroup.date.ConvertDateExtensions;
-import de.alpharogroup.crypto.algorithm.Algorithm;
-
 import de.alpharogroup.file.read.ReadFileExtensions;
 import de.alpharogroup.resource.system.factory.ResourceSystemFactory;
 import de.alpharogroup.resource.system.jpa.entities.Resources;
 import de.alpharogroup.throwable.RuntimeExceptionDecorator;
+
+import java.io.File;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.TimeZone;
 
 /**
  * The class {@link ModelSynchronizer}.
@@ -55,11 +51,11 @@ public class ModelSynchronizer
 	 */
 	public static Resources convert(final ResourcesModel resourcesModel)
 	{
-		final Resources resources = ResourceSystemFactory.getInstance().newResources(
-			resourcesModel.getDescription(), resourcesModel.getFilename(),
-			resourcesModel.getFilesize(), resourcesModel.getContentType(),
-			resourcesModel.getContent(), resourcesModel.getCreated(),
-			resourcesModel.isDeletedFlag(), resourcesModel.getChecksum());
+		final Resources resources = ResourceSystemFactory.getInstance()
+			.newResources(resourcesModel.getDescription(), resourcesModel.getFilename(),
+				resourcesModel.getFilesize(), resourcesModel.getContentType(),
+				resourcesModel.getContent(), resourcesModel.getCreated(),
+				resourcesModel.isDeletedFlag(), resourcesModel.getChecksum());
 		return resources;
 	}
 
@@ -94,8 +90,8 @@ public class ModelSynchronizer
 	 */
 	public static void synchronize(final Resources toSynchronize, final Resources withImage)
 	{
-		RuntimeExceptionDecorator.decorate(()->
-			CopyObjectExtensions.copy(withImage, toSynchronize));
+		RuntimeExceptionDecorator
+			.decorate(() -> CopyObjectExtensions.copy(withImage, toSynchronize));
 	}
 
 	/**
@@ -113,12 +109,14 @@ public class ModelSynchronizer
 		final String description)
 	{
 		final ResourcesModel resourcesModel = new ResourcesModel();
-		resourcesModel.setContent(RuntimeExceptionDecorator.decorate(()-> ReadFileExtensions.toByteArray(file)));
+		resourcesModel.setContent(
+			RuntimeExceptionDecorator.decorate(() -> ReadFileExtensions.toByteArray(file)));
 		resourcesModel.setContentType(contentType);
 		resourcesModel.setDescription(description);
 		resourcesModel.setFilename(file.getName());
 		resourcesModel.setFilesize(file.length());
-		resourcesModel.setChecksum(RuntimeExceptionDecorator.decorate(()-> FileChecksumExtensions.getChecksum(file, "SHA-256")));
+		resourcesModel.setChecksum(RuntimeExceptionDecorator
+			.decorate(() -> FileChecksumExtensions.getChecksum(file, "SHA-256")));
 		resourcesModel.setCreated(LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()),
 			TimeZone.getDefault().toZoneId()));
 		resourcesModel.setDeletedFlag(Boolean.FALSE);

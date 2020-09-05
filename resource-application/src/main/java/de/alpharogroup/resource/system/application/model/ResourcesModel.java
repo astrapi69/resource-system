@@ -24,23 +24,20 @@
  */
 package de.alpharogroup.resource.system.application.model;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.UUID;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import lombok.*;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 /**
  * The Class ResourceModel
  *
  * @author Asterios Raptis
  */
-@Data
-@NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class ResourcesModel
+@Data @NoArgsConstructor @ToString @EqualsAndHashCode public class ResourcesModel
 {
 
 	/** The technical primary key. */

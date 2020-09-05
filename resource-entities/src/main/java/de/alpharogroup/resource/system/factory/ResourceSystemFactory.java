@@ -24,13 +24,11 @@
  */
 package de.alpharogroup.resource.system.factory;
 
+import de.alpharogroup.resource.system.jpa.entities.Resources;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
-
-import de.alpharogroup.resource.system.jpa.entities.Resources;
-import org.apache.commons.lang3.ArrayUtils;
 
 public final class ResourceSystemFactory implements Serializable
 {
@@ -76,8 +74,8 @@ public final class ResourceSystemFactory implements Serializable
 	 * @return Resources A Resources object
 	 */
 	public Resources newResources(final UUID id, final String description, final String filename,
-		final long filesize, final String filetype, final byte[] content, final LocalDateTime created,
-		final Boolean deletedFlag, final String checksum)
+		final long filesize, final String filetype, final byte[] content,
+		final LocalDateTime created, final Boolean deletedFlag, final String checksum)
 	{
 		final Resources resources = new Resources();
 		resources.setDescription(description);
@@ -90,38 +88,6 @@ public final class ResourceSystemFactory implements Serializable
 		resources.setChecksum(checksum);
 		resources.setDeletedFlag(deletedFlag);
 		return resources;
-	}
-
-	/**
-	 * Factory method for create an Resources object.
-	 *
-	 * @param id
-	 *            the id
-	 * @param description
-	 *            the description
-	 * @param filename
-	 *            the filename
-	 * @param filesize
-	 *            the filesize
-	 * @param filetype
-	 *            the filetype
-	 * @param content
-	 *            the content
-	 * @param created
-	 *            the created
-	 * @param deletedFlag
-	 *            the deleted flag
-	 * @param checksum
-	 *            the checksum
-	 * @return Resources A Resources object
-	 */
-	public Resources newResources(final UUID id, final String description, final String filename,
-		final long filesize, final String filetype, final Byte[] content, final LocalDateTime created,
-		final Boolean deletedFlag, final String checksum)
-	{
-
-		return newResources(id, description, filename, filesize, filetype,
-			ArrayUtils.toPrimitive(content), created, deletedFlag, checksum);
 	}
 
 	/**
@@ -147,35 +113,6 @@ public final class ResourceSystemFactory implements Serializable
 	 */
 	public Resources newResources(final String description, final String filename,
 		final long filesize, final String filetype, final byte[] content, final LocalDateTime saved,
-		final Boolean deletedFlag, final String checksum)
-	{
-		return newResources(null, description, filename, filesize, filetype, content, saved,
-			deletedFlag, checksum);
-	}
-
-	/**
-	 * Factory method for create an Resources object.
-	 *
-	 * @param description
-	 *            the description
-	 * @param filename
-	 *            the filename
-	 * @param filesize
-	 *            the filesize
-	 * @param filetype
-	 *            the filetype
-	 * @param content
-	 *            the content
-	 * @param saved
-	 *            the saved
-	 * @param deletedFlag
-	 *            the deleted flag
-	 * @param checksum
-	 *            the checksum
-	 * @return Resources A Resources object
-	 */
-	public Resources newResources(final String description, final String filename,
-		final long filesize, final String filetype, final Byte[] content, final LocalDateTime saved,
 		final Boolean deletedFlag, final String checksum)
 	{
 		return newResources(null, description, filename, filesize, filetype, content, saved,
