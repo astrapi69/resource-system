@@ -5,7 +5,7 @@ create table resources
     id           uuid not null,
     checksum     varchar(255),
     content      BYTEA,
-    contentType  varchar(64),
+    content_type  varchar(64),
     created      timestamp,
     deleted_flag bool,
     description  varchar(1024),
