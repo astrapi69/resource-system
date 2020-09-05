@@ -144,7 +144,8 @@ public class ResourcesServiceImpl
 			.filepath(uploadRequest.getFilepath())
 			.filesize(fileContent.length)
 			.build();
-		return resourcesMapper.toDto(resources);
+		Resources saved = repository.save(resources);
+		return resourcesMapper.toDto(saved);
 	}
 
 }

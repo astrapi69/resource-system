@@ -13,8 +13,6 @@ dependencies {
     implementation("org.postgresql:postgresql")
     implementation("org.flywaydb:flyway-core")
     implementation("org.springframework:spring-oxm")
-    implementation("org.springframework.security:spring-security-web")
-    implementation("org.springframework.security:spring-security-config")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-aop")
