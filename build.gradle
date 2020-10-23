@@ -15,185 +15,56 @@ buildscript {
 	}
 }
 
-apply plugin: "io.franzbecker.gradle-lombok"
-apply plugin: "org.springframework.boot"
-apply plugin: "io.spring.dependency-management"
-apply plugin: "java"
-apply plugin: "maven-publish"
-apply plugin: "signing"
-apply plugin: "idea"
-apply plugin: "net.ltgt.apt"
-apply plugin: "net.ltgt.apt-idea"
-apply plugin: "com.github.ben-manes.versions"
-apply plugin: "com.github.hierynomus.license"
-apply plugin: "jacoco"
+allprojects {
+	group = "$groupPackage"
+	version = "$projectVersion"
 
-group = "$groupPackage"
-version = "$projectVersion"
-description = "$rootProject.name"
-sourceCompatibility = "$projectSourceCompatibility"
-
-repositories {
-	jcenter()
-	mavenLocal()
-	mavenCentral()
-}
-
-dependencies {
-	compileOnly("org.projectlombok:lombok:$lombokVersion")
-	annotationProcessor("org.projectlombok:lombok:$lombokVersion")
-	implementation("de.alpharogroup:bean-mapper-api:$beanMapperApiVersion")
-	implementation("de.alpharogroup:generic-mapper:$genericMapperVersion")
-	implementation("de.alpharogroup:ent-api:$entApiVersion")
-	implementation("de.alpharogroup:ent-core:$entCoreVersion")
-	implementation("de.alpharogroup:jobj-copy:$jobjCopyVersion")
-	implementation("de.alpharogroup:vintage-time:$vintageTimeVersion")
-	implementation("de.alpharogroup:checksum-up:$checksumUpVersion")
-	implementation("de.alpharogroup:crypt-api:$cryptApiVersion")
-	implementation("org.apache.commons:commons-lang3:$commonsLang3Version")
-	implementation("de.alpharogroup:throw-able:$throwAbleVersion")
-	implementation("de.alpharogroup:file-worker:$fileWorkerVersion")
-	implementation("de.alpharogroup:silly-collections:$sillyCollectionsVersion")
-	implementation("de.alpharogroup:spring-tool-extensions:$springToolExtensionsVersion")
-	implementation("io.springfox:springfox-swagger2:$springfoxSwaggerVersion")
-	implementation("io.springfox:springfox-swagger-ui:$springfoxSwaggerVersion")
-	implementation("com.thoughtworks.xstream:xstream:$xstreamVersion")
-	implementation("org.postgresql:postgresql")
-	implementation("org.flywaydb:flyway-core")
-	implementation("org.springframework:spring-oxm")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-actuator")
-	implementation("org.springframework.boot:spring-boot-starter-aop")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-}
-
-license {
-	ext.year="$projectInceptionYear"
-	ext.owner="$projectLeaderName"
-	header rootProject.file('src/main/resources/LICENSE.txt')
-	excludes(["**/README",
-			  "**/README.md",
-			  "**/LICENSE",
-			  "**/NOTICE",
-			  "**/*.xml",
-			  "**/*.xsl",
-			  "**/*.xsd",
-			  "**/*.dtd",
-			  "**/*.html",
-			  "**/*.jsp",
-			  "**/*.jpa",
-			  "**/*.sql",
-			  "**/*.properties",
-			  "**/*.bat",
-			  "**/*.gradle",
-			  "**/*.MF",
-			  "**/*.txt",
-			  "**/*.vm",
-			  "**/*.log",
-			  "**/*.map",
-			  "**/*.js.map",
-			  "**/*.tmpl",
-			  "**/*.js.tmpl",
-			  "**/*.editorconfig",
-			  "src/test/resources/**",
-			  "src/main/resources/**",
-			  "out/**",
-			  "build/**"])
-}
-
-// workhack for license issue #76
-gradle.startParameter.excludedTaskNames += "licenseMain"
-gradle.startParameter.excludedTaskNames += "licenseTest"
-
-task sourcesJar(type: Jar) {
-	archiveClassifier.set("sources")
-	from(sourceSets.main.allJava)
-}
-
-task javadocJar(type: Jar) {
-	from javadoc
-	archiveClassifier.set("javadoc")
-	javadoc.properties.failOnError = true
-}
-
-def releaseVersion = !version.endsWith("SNAPSHOT")
-
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			artifactId = "$rootProject.name"
-			from components.java
-			artifact sourcesJar
-			artifact javadocJar
-			pom {
-				name = "$rootProject.name"
-				description = "$projectDescription"
-				url = "$projectScmProviderUrl"+"$projectHolderUsername"+"$slash"+"$rootProject.name"
-				organization {
-					name = "$projectOrganizationName"
-					url = "$projectOrganizationUrl"
-				}
-				issueManagement {
-					system = "$projectIssueManagementSystem"
-					url = "$projectScmProviderUrl"+"$projectHolderUsername"+"$slash"+"$rootProject.name"+"$issuesPath"
-				}
-				licenses {
-					license {
-						name = "$projectLicenseName"
-						url = "$projectLicenseUrl"
-						distribution = "$projectLicenseDistribution"
-					}
-				}
-				developers {
-					developer {
-						id = "$projectHolderUsername"
-						name = "$projectLeaderName"
-					}
-				}
-				scm {
-					connection = "$projectScmGitUrlPrefix" + "$projectScmProviderDomain" + "$colon" + "$projectHolderUsername" + "$slash" + "$rootProject.name" + "$projectScmGitUrlSuffix"
-					developerConnection = "$projectScmGitUrlPrefix" + "$projectScmProviderDomain" + "$colon" + "$projectHolderUsername" + "$slash" + "$rootProject.name" + "$projectScmGitUrlSuffix"
-					url = "$projectScmGitUrlPrefix" + "$projectScmProviderDomain" + "$colon" + "$projectHolderUsername" + "$slash" + "$rootProject.name" + "$projectScmGitUrlSuffix"
-				}
-			}
-		}
-	}
 	repositories {
-		maven {
-			credentials {
-				username System.getenv("$projectRepositoriesUserNameKey") ?: project.property("$projectRepositoriesUserNameKey")
-				password System.getenv("$projectRepositoriesPasswordKey") ?: project.property("$projectRepositoriesPasswordKey")
-			}
-			def releasesRepoUrl = "$projectRepositoriesReleasesRepoUrl"
-			def snapshotsRepoUrl = "$projectRepositoriesSnapshotsRepoUrl"
-			url = releaseVersion ? releasesRepoUrl : snapshotsRepoUrl
+		jcenter()
+		mavenCentral()
+	}
+}
+
+subprojects {
+
+	apply plugin: "java"
+	apply plugin: "maven-publish"
+	apply plugin: "signing"
+	apply plugin: "jacoco"
+	apply plugin: "org.springframework.boot"
+	apply plugin: "io.spring.dependency-management"
+	apply plugin: "com.github.ben-manes.versions"
+	apply plugin: "com.github.hierynomus.license"
+
+	bootJar {
+		enabled = false
+	}
+
+	jar {
+		enabled = true
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootGradlePluginVersion")
 		}
 	}
-}
 
-tasks.withType(GenerateModuleMetadata) {
-	enabled = false
-}
-
-signing {
-	if (releaseVersion) {
-		sign publishing.publications.mavenJava
+	dependencies {
+		compileOnly("org.projectlombok:lombok:$lombokVersion")
+		annotationProcessor("org.projectlombok:lombok:$lombokVersion")
 	}
-}
 
-javadoc {
-	failOnError = false
-	if(JavaVersion.current().isJava9Compatible()) {
-		options.addBooleanOption("html5", true)
+	// workhack for license issue #76
+	gradle.startParameter.excludedTaskNames += "licenseMain"
+	gradle.startParameter.excludedTaskNames += "licenseTest"
+
+	compileJava {
+		sourceCompatibility = "$projectSourceCompatibility"
+		targetCompatibility = "$projectTargetCompatibility"
 	}
-}
 
-tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
-}
-
-test {
-	useJUnitPlatform()
+	test {
+		useJUnitPlatform()
+	}
 }
