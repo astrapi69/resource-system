@@ -26,10 +26,9 @@ package de.alpharogroup.resource.system.service.api;
 
 import de.alpharogroup.resource.system.jpa.entities.Resources;
 import de.alpharogroup.resource.system.viewmodel.Resource;
-import de.alpharogroup.resource.system.viewmodel.UploadRequest;
+import de.alpharogroup.resource.system.dto.UploadRequest;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface ResourcesService
 {

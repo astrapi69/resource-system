@@ -1,8 +1,4 @@
 
-dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-}
-
 license {
     ext.year="$projectInceptionYear"
     ext.owner="$projectLeaderName"
@@ -48,6 +44,9 @@ task javadocJar(type: Jar) {
     archiveClassifier.set("javadoc")
     javadoc.properties.failOnError = true
 }
+tasks.withType(GenerateModuleMetadata) {
+    enabled = false
+}
 
 def releaseVersion = !version.endsWith("SNAPSHOT")
 
@@ -58,8 +57,10 @@ publishing {
             from components.java
             artifact sourcesJar
             artifact javadocJar
+            artifact jar
             pom {
                 name = "$project.name"
+                version = "$project.version"
                 description = "$projectViewmodelsDescription"
                 url = "$projectScmProviderUrl"+"$projectHolderUsername"+"/"+"$rootProject.name"
                 organization {

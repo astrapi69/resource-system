@@ -27,7 +27,7 @@ package de.alpharogroup.resource.system.controller;
 import de.alpharogroup.resource.system.configuration.ApplicationConfiguration;
 import de.alpharogroup.resource.system.service.api.ResourcesService;
 import de.alpharogroup.resource.system.viewmodel.Resource;
-import de.alpharogroup.resource.system.viewmodel.UploadRequest;
+import de.alpharogroup.resource.system.dto.UploadRequest;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -56,8 +56,8 @@ import java.io.InputStream;
 		method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE,
 		produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Downloads the file from the given id") @ApiImplicitParams({
-		@ApiImplicitParam(name = "id", value = "The id", dataType = "String") }) public ResponseEntity<?> download(
-		@PathVariable String id)
+		@ApiImplicitParam(name = "id", value = "The id", dataType = "String") })
+	public ResponseEntity<?> download(@PathVariable String id)
 	{
 		Resource resource = resourcesService.download(id);
 		String filename = resource.getFilename();
@@ -74,8 +74,8 @@ import java.io.InputStream;
 	}
 
 	@RequestMapping(path = "/file", consumes = {
-		MediaType.MULTIPART_FORM_DATA_VALUE }, method = RequestMethod.POST) public ResponseEntity<Resource> upload(
-		@ModelAttribute UploadRequest uploadRequest)
+		MediaType.MULTIPART_FORM_DATA_VALUE }, method = RequestMethod.POST)
+	public ResponseEntity<Resource> upload(@ModelAttribute UploadRequest uploadRequest)
 	{
 		Resource resource = resourcesService.upload(uploadRequest);
 		return ResponseEntity.status(HttpStatus.OK).body(resource);

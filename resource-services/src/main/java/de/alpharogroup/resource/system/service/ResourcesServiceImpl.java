@@ -38,7 +38,7 @@ import de.alpharogroup.resource.system.jpa.entities.Resources;
 import de.alpharogroup.resource.system.jpa.repositories.ResourcesRepository;
 import de.alpharogroup.resource.system.mapper.ResourcesMapper;
 import de.alpharogroup.resource.system.viewmodel.Resource;
-import de.alpharogroup.resource.system.viewmodel.UploadRequest;
+import de.alpharogroup.resource.system.dto.UploadRequest;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
