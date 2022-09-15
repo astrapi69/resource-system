@@ -30,7 +30,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import de.alpharogroup.db.entity.uniqueable.UUIDEntity;
+import io.github.astrapi69.entity.uniqueable.UUIDEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;

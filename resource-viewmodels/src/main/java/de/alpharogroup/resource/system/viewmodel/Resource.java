@@ -56,6 +56,8 @@ public class Resource
 	String description;
 	/** The filename from this resource. */
 	String filename;
+	/** The filepath from this resource. */
+	String filepath;
 	/** The size from this resource. */
 	long filesize;
 }

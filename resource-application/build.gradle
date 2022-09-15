@@ -4,7 +4,7 @@ dependencies {
     implementation project(":resource-services")
     implementation project(":resource-viewmodels")
 
-    implementation("de.alpharogroup:ent-core:$entCoreVersion") //
+    implementation("io.github.astrapi69:ent-core:$entCoreVersion") //
     implementation("de.alpharogroup:jobj-copy:$jobjCopyVersion") //
     implementation("de.alpharogroup:checksum-up:$checksumUpVersion") //
     implementation("org.apache.commons:commons-lang3:$commonsLang3Version")//

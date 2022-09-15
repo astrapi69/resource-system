@@ -6,8 +6,9 @@ dependencies {
 
     implementation("de.alpharogroup:bean-mapper-api:$beanMapperApiVersion") //
     implementation("de.alpharogroup:generic-mapper:$genericMapperVersion") //
+    implementation("io.github.astrapi69:data-api:$dataApiVersion")
     implementation("de.alpharogroup:ent-api:$entApiVersion") //
-    implementation("de.alpharogroup:ent-core:$entCoreVersion") //
+    implementation("io.github.astrapi69:ent-core:$entCoreVersion") //
     implementation("de.alpharogroup:checksum-up:$checksumUpVersion") //
     implementation("de.alpharogroup:silly-collections:$sillyCollectionsVersion") //
     implementation("org.postgresql:postgresql")
