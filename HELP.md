@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'de.alpharogroup.resource-system' is invalid and this project uses 'de.alpharogroup.resourcesystem' instead.
+* The original package name 'io.github.astrapi69.resource-system' is invalid and this project uses 'io.github.astrapi69.resourcesystem' instead.
 
 # Getting Started
 

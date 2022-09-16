@@ -1,0 +1,3 @@
+apply from: "../gradle/dependencies-resource-mapper.gradle"
+apply from: "../gradle/licensing.gradle"
+apply from: "../gradle/publishing-resource-mapper.gradle"
