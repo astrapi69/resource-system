@@ -35,80 +35,92 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfiguration extends AbstractSwaggerConfiguration {
+public class SwaggerConfiguration extends AbstractSwaggerConfiguration
+{
 	@Autowired
 	ApplicationProperties applicationProperties;
 
 	@Bean
-	public Docket api() {
+	public Docket api()
+	{
 		return super.api();
 	}
 
-	protected ApiInfo metaData() {
+	protected ApiInfo metaData()
+	{
 		return super.metaData();
 	}
 
 	@Override
-	public String newBasePackage() {
+	public String newBasePackage()
+	{
 		return applicationProperties.getBasePackage() != null
-				? applicationProperties.getBasePackage()
-				: "io.github.astrapi69.resource.system";
+			? applicationProperties.getBasePackage()
+			: "io.github.astrapi69.resource.system";
 	}
 
 	@Override
-	public String newApiInfoTitle() {
+	public String newApiInfoTitle()
+	{
 		return applicationProperties.getApiInfoTitle() != null
-				? applicationProperties.getApiInfoTitle()
-				: "File resources REST API";
+			? applicationProperties.getApiInfoTitle()
+			: "File resources REST API";
 	}
 
 	@Override
-	public String newApiInfoDescription() {
+	public String newApiInfoDescription()
+	{
 		return applicationProperties.getApiInfoDescription() != null
-				? applicationProperties.getApiInfoDescription()
-				: "REST API for resources";
+			? applicationProperties.getApiInfoDescription()
+			: "REST API for resources";
 	}
 
 	@Override
-	public String newApiInfoVersion() {
+	public String newApiInfoVersion()
+	{
 		return applicationProperties.getApiInfoVersion() != null
-				? applicationProperties.getApiInfoVersion()
-				: AppRestPath.REST_API_VERSION_1;
+			? applicationProperties.getApiInfoVersion()
+			: AppRestPath.REST_API_VERSION_1;
 	}
 
 	@Override
-	public String newApiInfoLicense() {
+	public String newApiInfoLicense()
+	{
 		return applicationProperties.getApiInfoLicense() != null
-				? applicationProperties.getApiInfoLicense()
-				: "MIT";
+			? applicationProperties.getApiInfoLicense()
+			: "MIT";
 	}
 
 	@Override
-	public String newApiInfoLicenseUrl() {
+	public String newApiInfoLicenseUrl()
+	{
 		return applicationProperties.getApiInfoLicenseUrl() != null
-				? applicationProperties.getApiInfoLicenseUrl()
-				: "https://opensource.org/licenses/MIT";
+			? applicationProperties.getApiInfoLicenseUrl()
+			: "https://opensource.org/licenses/MIT";
 	}
 
 	@Override
-	public String newContactName() {
+	public String newContactName()
+	{
 		return applicationProperties.getContactName() != null
-				? applicationProperties.getContactName()
-				: "resource-system org.";
+			? applicationProperties.getContactName()
+			: "resource-system org.";
 	}
 
 	@Override
-	public String newContactUrl() {
+	public String newContactUrl()
+	{
 		return applicationProperties.getContactUrl() != null
-				? applicationProperties.getContactUrl()
-				: "www.resource-system.org";
+			? applicationProperties.getContactUrl()
+			: "www.resource-system.org";
 	}
 
 	@Override
-	public String newDocketPathsRegex() {
+	public String newDocketPathsRegex()
+	{
 		return applicationProperties.getDocketPathsRegex() != null
-				? applicationProperties.getDocketPathsRegex()
-				: AppRestPath.REST_DOCKET_PATHS_REGEX;
+			? applicationProperties.getDocketPathsRegex()
+			: AppRestPath.REST_DOCKET_PATHS_REGEX;
 	}
 
 }

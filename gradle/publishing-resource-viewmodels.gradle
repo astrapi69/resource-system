@@ -5,6 +5,14 @@ def releaseVersion = !version.endsWith("SNAPSHOT")
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
             artifactId = "$project.name"
             from components.java
             artifact sourcesJar

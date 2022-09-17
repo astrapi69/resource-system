@@ -51,18 +51,20 @@ import java.io.InputStream;
 
 @RestController
 @RequestMapping(value = AppRestPath.REST_VERSION
-		+ AppRestPath.REST_FILES, produces = MediaType.APPLICATION_JSON_VALUE)
+	+ AppRestPath.REST_FILES, produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class ResourcesController {
+public class ResourcesController
+{
 	ResourcesService resourcesService;
 	public static final String REST_PATH_DOWNLOAD = "/download/{id}";
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = REST_PATH_DOWNLOAD, method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Downloads the file from the given id")
-	@ApiImplicitParams({@ApiImplicitParam(name = "id", value = "The id", dataType = "String")})
-	public ResponseEntity<?> download(@PathVariable String id) {
+	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "The id", dataType = "String") })
+	public ResponseEntity<?> download(@PathVariable String id)
+	{
 		Resource resource = resourcesService.download(id);
 		String filename = resource.getFilename();
 		HttpHeaders header = new HttpHeaders();
@@ -78,7 +80,7 @@ public class ResourcesController {
 	}
 
 	@RequestMapping(path = "/file", consumes = {
-			MediaType.MULTIPART_FORM_DATA_VALUE}, method = RequestMethod.POST)
+			MediaType.MULTIPART_FORM_DATA_VALUE }, method = RequestMethod.POST)
 	public ResponseEntity<Resource> upload(@ModelAttribute UploadRequest uploadRequest)
 	{
 		Resource resource = resourcesService.upload(uploadRequest);
