@@ -1,0 +1,23 @@
+dependencies {
+
+    implementation project(":resource-entities")
+    implementation project(":resource-viewmodels")
+    implementation project(":resource-mapper")
+
+    implementation("io.github.astrapi69:bean-mapper-api:$beanMapperApiVersion") //
+    implementation("io.github.astrapi69:generic-mapper:$genericMapperVersion") //
+    implementation("io.github.astrapi69:data-api:$dataApiVersion")
+    implementation("io.github.astrapi69:ent-core:$entCoreVersion") //
+    implementation("io.github.astrapi69:crypt-api:$cryptApiVersion")
+    implementation("io.github.astrapi69:checksum-up:$checksumUpVersion") //
+    implementation("io.github.astrapi69:silly-collection:$sillyCollectionVersion") //
+    implementation("org.postgresql:postgresql")
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.springframework:spring-oxm")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}

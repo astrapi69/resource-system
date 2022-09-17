@@ -55,7 +55,7 @@ public class Resources extends UUIDEntity implements Cloneable
 	 */
 	private static final long serialVersionUID = 1L;
 	static final String SINGULAR_ENTITY_NAME = "resource";
-	static final String TABLE_NAME = SINGULAR_ENTITY_NAME+"s";
+	static final String TABLE_NAME = SINGULAR_ENTITY_NAME + "s";
 	static final String COLUMN_NAME_CONTENT_TYPE = "content_type";
 	static final String COLUMN_NAME_DELETE_FLAG = "deleted_flag";
 	/** The checksum from this resource. */

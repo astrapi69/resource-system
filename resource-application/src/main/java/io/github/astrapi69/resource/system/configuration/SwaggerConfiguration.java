@@ -24,40 +24,91 @@
  */
 package io.github.astrapi69.resource.system.configuration;
 
-import static springfox.documentation.builders.PathSelectors.regex;
-
-import java.util.Collections;
-
+import io.github.astrapi69.resource.system.enumtype.AppRestPath;
+import io.github.astrapi69.spring.configuration.AbstractSwaggerConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfiguration
-{
-	private static final String VERSION_API_1 = "/v1";
+public class SwaggerConfiguration extends AbstractSwaggerConfiguration {
+	@Autowired
+	ApplicationProperties applicationProperties;
 
 	@Bean
-	public Docket api()
-	{
-		return new Docket(DocumentationType.SWAGGER_2).select()
-			.apis(RequestHandlerSelectors.basePackage("io.github.astrapi69.user.auth"))
-			.paths(regex(VERSION_API_1 + "/.*|")).build().apiInfo(metaData());
+	public Docket api() {
+		return super.api();
 	}
 
-	private ApiInfo metaData()
-	{
-		return new ApiInfo("User Auth REST API",
-			"REST API for resources", "v1", "",
-			new Contact("resource-system org.", "www.resource-system.org", ""), "", "",
-			Collections.emptyList());
+	protected ApiInfo metaData() {
+		return super.metaData();
+	}
+
+	@Override
+	public String newBasePackage() {
+		return applicationProperties.getBasePackage() != null
+				? applicationProperties.getBasePackage()
+				: "io.github.astrapi69.resource.system";
+	}
+
+	@Override
+	public String newApiInfoTitle() {
+		return applicationProperties.getApiInfoTitle() != null
+				? applicationProperties.getApiInfoTitle()
+				: "File resources REST API";
+	}
+
+	@Override
+	public String newApiInfoDescription() {
+		return applicationProperties.getApiInfoDescription() != null
+				? applicationProperties.getApiInfoDescription()
+				: "REST API for resources";
+	}
+
+	@Override
+	public String newApiInfoVersion() {
+		return applicationProperties.getApiInfoVersion() != null
+				? applicationProperties.getApiInfoVersion()
+				: AppRestPath.REST_API_VERSION_1;
+	}
+
+	@Override
+	public String newApiInfoLicense() {
+		return applicationProperties.getApiInfoLicense() != null
+				? applicationProperties.getApiInfoLicense()
+				: "MIT";
+	}
+
+	@Override
+	public String newApiInfoLicenseUrl() {
+		return applicationProperties.getApiInfoLicenseUrl() != null
+				? applicationProperties.getApiInfoLicenseUrl()
+				: "https://opensource.org/licenses/MIT";
+	}
+
+	@Override
+	public String newContactName() {
+		return applicationProperties.getContactName() != null
+				? applicationProperties.getContactName()
+				: "resource-system org.";
+	}
+
+	@Override
+	public String newContactUrl() {
+		return applicationProperties.getContactUrl() != null
+				? applicationProperties.getContactUrl()
+				: "www.resource-system.org";
+	}
+
+	@Override
+	public String newDocketPathsRegex() {
+		return applicationProperties.getDocketPathsRegex() != null
+				? applicationProperties.getDocketPathsRegex()
+				: AppRestPath.REST_DOCKET_PATHS_REGEX;
 	}
 
 }

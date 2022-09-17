@@ -1,0 +1,12 @@
+dependencies {
+    implementation project(":resource-entities")
+    implementation project(":resource-viewmodels")
+    implementation("io.github.astrapi69:bean-mapper-api:$beanMapperApiVersion")
+    implementation("io.github.astrapi69:generic-mapper:$genericMapperVersion")
+    implementation("io.github.astrapi69:data-api:$dataApiVersion")
+    implementation("io.github.astrapi69:ent-core:$entCoreVersion")
+    implementation("org.springframework.boot:spring-boot-starter")
+    testImplementation project(":resource-application")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa")
+}

@@ -24,7 +24,7 @@
  */
 package io.github.astrapi69.resource.system.controller;
 
-import io.github.astrapi69.resource.system.configuration.ApplicationConfiguration;
+import io.github.astrapi69.resource.system.enumtype.AppRestPath;
 import io.github.astrapi69.resource.system.service.api.ResourcesService;
 import io.github.astrapi69.resource.system.viewmodel.Resource;
 import io.github.astrapi69.resource.system.viewmodel.UploadRequest;
@@ -39,26 +39,30 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 @RestController
-@RequestMapping(value = ApplicationConfiguration.REST_VERSION + ResourcesController.REST_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-@AllArgsConstructor @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true) public class ResourcesController
-{
+@RequestMapping(value = AppRestPath.REST_VERSION
+		+ AppRestPath.REST_FILES, produces = MediaType.APPLICATION_JSON_VALUE)
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public class ResourcesController {
 	ResourcesService resourcesService;
-	public static final String REST_PATH = "/files";
 	public static final String REST_PATH_DOWNLOAD = "/download/{id}";
 
-	@CrossOrigin(origins = "*") @RequestMapping(value = REST_PATH_DOWNLOAD,
-		method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE,
-		produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiOperation(value = "Downloads the file from the given id") @ApiImplicitParams({
-		@ApiImplicitParam(name = "id", value = "The id", dataType = "String") })
-	public ResponseEntity<?> download(@PathVariable String id)
-	{
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = REST_PATH_DOWNLOAD, method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Downloads the file from the given id")
+	@ApiImplicitParams({@ApiImplicitParam(name = "id", value = "The id", dataType = "String")})
+	public ResponseEntity<?> download(@PathVariable String id) {
 		Resource resource = resourcesService.download(id);
 		String filename = resource.getFilename();
 		HttpHeaders header = new HttpHeaders();
@@ -74,7 +78,7 @@ import java.io.InputStream;
 	}
 
 	@RequestMapping(path = "/file", consumes = {
-		MediaType.MULTIPART_FORM_DATA_VALUE }, method = RequestMethod.POST)
+			MediaType.MULTIPART_FORM_DATA_VALUE}, method = RequestMethod.POST)
 	public ResponseEntity<Resource> upload(@ModelAttribute UploadRequest uploadRequest)
 	{
 		Resource resource = resourcesService.upload(uploadRequest);

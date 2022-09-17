@@ -31,8 +31,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 
-@Repository public interface ResourcesRepository extends JpaRepository<Resources, UUID>
+@Repository
+public interface ResourcesRepository extends JpaRepository<Resources, UUID>
 {
 	List<Resources> findByDescription(String description);
+
 	List<Resources> findByFilename(String filename);
 }

@@ -33,9 +33,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableConfigurationProperties({ ApplicationProperties.class })
-public class ResourceSystemApplication {
+public class ResourceSystemApplication
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		SpringApplication.run(ResourceSystemApplication.class, args);
 	}
 

@@ -56,9 +56,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class ResourcesServiceImpl
-	implements
-		ResourcesService
+public class ResourcesServiceImpl implements ResourcesService
 {
 	ResourcesRepository repository;
 
@@ -97,26 +95,31 @@ public class ResourcesServiceImpl
 		return ListExtensions.getFirst(Resources);
 	}
 
-	public Resource download(String id) {
+	public Resource download(String id)
+	{
 		Resource resource = Resource.builder().build();
 		Optional<Resources> optionalEntity = repository.findById(UUID.fromString(id));
-		if (optionalEntity.isPresent()) {
+		if (optionalEntity.isPresent())
+		{
 			Resources entity = optionalEntity.get();
 			resource = resourcesMapper.toDto(entity);
 		}
 		return resource;
 	}
 
-	public Resource upload(UploadRequest uploadRequest) {
+	public Resource upload(UploadRequest uploadRequest)
+	{
 		MultipartFile file = uploadRequest.getMultipartFile();
 		String filename = StringUtils.cleanPath(file.getOriginalFilename());
 		String contentType = file.getContentType();
 		String md5;
 		byte[] fileContent;
-		if (file.isEmpty()) {
+		if (file.isEmpty())
+		{
 			throw new RuntimeException("file is empty");
 		}
-		if (filename.contains("..")) {
+		if (filename.contains(".."))
+		{
 			throw new RuntimeException("Filename contains not valid path sequence");
 		}
 		try
@@ -126,24 +129,17 @@ public class ResourcesServiceImpl
 		}
 		catch (IOException e)
 		{
-			throw new RuntimeException("Read file bytes failed",e);
+			throw new RuntimeException("Read file bytes failed", e);
 		}
 		catch (NoSuchAlgorithmException e)
 		{
 			throw new RuntimeException(
 				"Checksum failed because of not found algorithm for checksum genearation", e);
 		}
-		Resources resources = Resources.builder()
-			.checksum(md5)
-			.content(fileContent)
-			.contentType(contentType)
-			.created(LocalDateTime.now())
-			.deletedFlag(false)
-			.description(file.getName())
-			.filename(filename)
-			.filepath(uploadRequest.getFilepath())
-			.filesize(fileContent.length)
-			.build();
+		Resources resources = Resources.builder().checksum(md5).content(fileContent)
+			.contentType(contentType).created(LocalDateTime.now()).deletedFlag(false)
+			.description(file.getName()).filename(filename).filepath(uploadRequest.getFilepath())
+			.filesize(fileContent.length).build();
 		Resources saved = repository.save(resources);
 		return resourcesMapper.toDto(saved);
 	}
