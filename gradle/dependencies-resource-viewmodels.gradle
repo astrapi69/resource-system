@@ -1,3 +1,7 @@
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("io.github.astrapi69:file-worker:$fileWorkerVersion")
+    testImplementation("io.github.astrapi69:crypt-api:$cryptApiVersion")
+    testImplementation("io.github.astrapi69:checksum-up:$checksumUpVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
