@@ -24,16 +24,21 @@
  */
 package io.github.astrapi69.resource.system.jpa.entities;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import io.github.astrapi69.entity.uniqueable.UUIDEntity;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import io.github.astrapi69.entity.uniqueable.UUIDEntity;
 
 /**
  * The entity class {@link Resources} is keeping the information for the resources from users like
@@ -69,7 +74,7 @@ public class Resources extends UUIDEntity implements Cloneable
 	String contentType;
 	/** The date when this resource is created in the database. */
 	@Column
-	LocalDateTime created;
+	OffsetDateTime created;
 	/**
 	 * A flag that indicates that the resource is deleted from the user. Will be deleted in batch
 	 * process.

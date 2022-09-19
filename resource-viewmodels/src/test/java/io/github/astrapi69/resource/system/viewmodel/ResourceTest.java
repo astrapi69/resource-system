@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +38,7 @@ public class ResourceTest
 		String contentType = Files.probeContentType(tmpFile.toPath());
 		md5 = ByteArrayChecksumExtensions.getChecksum(fileContent, ChecksumAlgorithm.MD5);
 		Resource resource = Resource.builder().checksum(md5).content(fileContent)
-			.contentType(contentType).created(LocalDateTime.now()).deletedFlag(false)
+			.contentType(contentType).created(OffsetDateTime.now()).deletedFlag(false)
 			.description(filename).filename(filename)
 			.filepath(FileExtensions.getAbsolutPathWithoutFilename(tmpFile))
 			.filesize(fileContent.length).build();

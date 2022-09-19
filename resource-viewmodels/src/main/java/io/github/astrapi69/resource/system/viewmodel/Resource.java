@@ -24,11 +24,14 @@
  */
 package io.github.astrapi69.resource.system.viewmodel;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 /**
  * The class {@link Resource}
@@ -36,7 +39,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Resource
 {
@@ -47,7 +50,7 @@ public class Resource
 	/** The content type from this resource. */
 	String contentType;
 	/** The date when this resource is created in the database. */
-	LocalDateTime created;
+	OffsetDateTime created;
 	/**
 	 * A flag that indicates that the resource is deleted from the user. Will be deleted in batch
 	 * process.
